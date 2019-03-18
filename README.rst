@@ -2,7 +2,7 @@ Wrapper SDK
 ===========
 This project contains the common functionality needed for developing a wrapper for SimPhoNy.
 
-It will match the updated design being followed in the [layers_redesign branch of Simlammps](https://gitlab.cc-asp.fraunhofer.de/MarketPlace/simlammps/tree/layers_redesign)
+It will match the updated design being followed in the `layers_redesign branch of Simlammps <https://gitlab.cc-asp.fraunhofer.de/MarketPlace/simlammps/tree/layers_redesign>`_
 
 Copyright (c) 2018, Adham Hashibon and Materials Informatics Team at Fraunhofer IWM.
 All rights reserved.
