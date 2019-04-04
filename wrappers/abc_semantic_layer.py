@@ -11,8 +11,8 @@ from uuid import UUID
 
 import cuds.classes
 from cuds.utils import check_arguments
-from wrappers.abc_interoperability_layer \
-    import ABCInteroperabilityLayer
+# from wrappers.abc_interoperability_layer \
+#    import ABCInteroperabilityLayer
 
 
 class ABCSemanticLayer(object, metaclass=ABCMeta):
@@ -30,7 +30,8 @@ class ABCSemanticLayer(object, metaclass=ABCMeta):
         :param interoperability_layer: shared instance of the intOp layer
         """
         if interoperability_layer is None:
-            self._intop = ABCInteroperabilityLayer()
+            # self._intop = ABCInteroperabilityLayer()
+            self._intop = None
             self._path = []
         else:
             self._intop = interoperability_layer

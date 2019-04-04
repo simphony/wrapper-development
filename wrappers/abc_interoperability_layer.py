@@ -8,7 +8,7 @@
 from abc import ABCMeta, abstractmethod
 from copy import deepcopy
 
-from wrappers.abc_cuds_checker import ABCCudsChecker
+# from wrappers.abc_cuds_checker import ABCCudsChecker
 
 
 class ABCInteroperabilityLayer(object, metaclass=ABCMeta):
@@ -17,7 +17,8 @@ class ABCInteroperabilityLayer(object, metaclass=ABCMeta):
     Here will be stored the internal copy of cuds
     """
     def __init__(self):
-        self._cuds_checker = ABCCudsChecker()
+        # self._cuds_checker = ABCCudsChecker()
+        self._cuds_checker = None
         self._cuds = None
         self._ran = False
 
