@@ -20,11 +20,11 @@ Wrapper development
 -------------------
 The design in a wrapper has 3 layers:
 
- - *Semantic layer*: follows the CUDS API, wrapping the other layers to the user.
- - *Interoperability layer*: translates the semantic information (CUBA)
-   into calls to the syntactic layer.
- - *Syntactic layer*: Communicates to the engine in a pure syntactical way
-   (no CUDS or CUBA knowledge).
+- *Semantic layer*: follows the CUDS API, wrapping the other layers to the user.
+- *Interoperability layer*: translates the semantic information (CUBA)
+  into calls to the syntactic layer.
+- *Syntactic layer*: Communicates to the engine in a pure syntactical way
+  (no CUDS or CUBA knowledge).
 
 Semantic layer
 ^^^^^^^^^^^^^^
@@ -60,11 +60,9 @@ While the methods to check are standard, *what* to check will depend on the engi
 and the type of simulation. For this reason, the developer has to redefine the
 `check_all` method with the appropriate calls to the two methods:
 
- - `check_equal_amount(cuds_object, cuba_key, expected_amount)`:
-
+- `check_equal_amount(cuds_object, cuba_key, expected_amount)`:
    checks that a certain object has an expected amount of elements of a certain type.
- - `check_children(cuds_object, cuba_key, child_value_pairs)`:
-
+- `check_children(cuds_object, cuba_key, child_value_pairs)`:
    checks that the subelements of a specific type have a certain number of
    elements of a certain type.
 
