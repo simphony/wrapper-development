@@ -18,6 +18,10 @@ Requirements
 
 Wrapper development
 -------------------
+
+.. image:: wrapper_layers.png
+   :alt: image with the 3 layers and their ABCs
+
 The design in a wrapper has 3 layers:
 
 - *Semantic layer*: follows the CUDS API, wrapping the other layers to the user.
