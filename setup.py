@@ -13,7 +13,7 @@ setup(
     version=VERSION,
     author='SimPhoNy, EU FP7 Project (Nr. 604005)',
     url='www.simphony-project.eu',
-    description='The wrapper sdk for SimPhoNy',
+    description='The wrappers sdk for SimPhoNy',
     keywords='simphony, cuds, Fraunhofer IWM, wrappers',
     long_description=README_TEXT,
     install_requires=[
