@@ -58,7 +58,7 @@ Cuds checker
 """"""""""""
 The cuds checker provides the methods required to check the consistency of the
 provided cuds before the first run. It checks that the minimum required elements
-are present anf in the correct place for the interoperability layer.
+are present and in the correct place for the interoperability layer.
 
 While the methods to check are standard, *what* to check will depend on the engine
 and the type of simulation. For this reason, the developer has to redefine the
