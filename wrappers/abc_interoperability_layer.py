@@ -23,6 +23,10 @@ class ABCInteroperabilityLayer(object, metaclass=ABCMeta):
         self._ran = False
 
     def run(self):
+        """
+        Calls the run method and updates the cuds afterwards.
+        In the first run the cuds are checked and sent to the engine.
+        """
         if not self._ran:
             self._check_cuds()
             self._add_whole_cuds()
@@ -55,10 +59,10 @@ class ABCInteroperabilityLayer(object, metaclass=ABCMeta):
 
     def add(self, path, entity):
         """
-        Adds an entity
-        :param path:
-        :param entity:
-        :return:
+        Adds an entity to the one in the given path.
+
+        :param path: list of uuids to the container
+        :param entity: entity to add
         """
         current = self.get(path)
         current.add(deepcopy(entity))
@@ -74,6 +78,11 @@ class ABCInteroperabilityLayer(object, metaclass=ABCMeta):
         pass
 
     def remove(self, path):
+        """
+        Removes an entity given the path to it.
+
+        :param path: list of uuids to the entity
+        """
         entity = self.get(path)
         self._remove_by_type(entity)
         # Remove from internal cuds
