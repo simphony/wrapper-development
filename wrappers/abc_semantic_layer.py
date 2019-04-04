@@ -75,6 +75,12 @@ class ABCSemanticLayer(object, metaclass=ABCMeta):
         return self.string("wrapper")
 
     def string(self, name):
+        """
+        Builds the string returned in the __str__ method.
+
+        :param name: name of the wrapper
+        :return: string with the uid of the referenced object
+        """
         string = "<" + name + " instance to object " + \
                  str(self._intop.get(self._path).uid) + ">"
         return string
@@ -105,6 +111,7 @@ class ABCSemanticLayer(object, metaclass=ABCMeta):
 
         for key in keys:
             child = self._intop.get(self._path + [key])
+            # Wrap to new instances of Semantic Layer
             child_semantic = self._wrap(child)
             output.append(child_semantic)
         return output
@@ -188,14 +195,5 @@ class ABCSemanticLayer(object, metaclass=ABCMeta):
             return None
         else:
             new_path = self._path + [cuds_object.uid]
-            return self._wrap_concrete(new_path, self._intop)
-
-    @abstractmethod
-    def _wrap_concrete(self, path_to_subelement, interoperability_layer):
-        """
-
-        :param path_to_subelement: list of uids from the root
-        :param interoperability_layer: current reference to the intOp layer
-        :return:
-        """
-        pass
+            # __class__ will point to the concrete implementation
+            return self.__class__(new_path, self._intop)

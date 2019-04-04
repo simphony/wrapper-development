@@ -33,8 +33,7 @@ The design in a wrapper has 3 layers:
 Semantic layer
 ^^^^^^^^^^^^^^
 Most of the code is provided in the ABC. The developer only has to import their
-implementation of the Interoperability layer, redefine the `__str__` method and
-the method for wrapping the instances.
+implementation of the Interoperability layer and redefine the `__str__` method.
 
 The different instances will keep a uuid path to the cuds element they refer to.
 When the user wants to get a certain subelement, a new instance of the
