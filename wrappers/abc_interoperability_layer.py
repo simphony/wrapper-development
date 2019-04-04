@@ -23,8 +23,8 @@ class ABCInteroperabilityLayer(object, metaclass=ABCMeta):
         self._ran = False
 
     def run(self):
-        self._check_cuds()
         if not self._ran:
+            self._check_cuds()
             self._add_whole_cuds()
             self._ran = True
         self._run_engine()
