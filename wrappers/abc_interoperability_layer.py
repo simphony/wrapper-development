@@ -105,8 +105,4 @@ class ABCInteroperabilityLayer(object, metaclass=ABCMeta):
         cuds_object = self.get(path)
         setattr(cuds_object, name, value)
         if self._ran:
-            self._update_in_engine(cuds_object, path)
-
-    @abstractmethod
-    def _update_in_engine(self, entity, path):
-        pass
+            self._update_by_type(cuds_object)
