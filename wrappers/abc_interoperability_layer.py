@@ -95,14 +95,14 @@ class ABCInteroperabilityLayer(object, metaclass=ABCMeta):
     def update(self, path, entity):
         # Update internal cuds
         self.get(path).update(entity)
-        self._update_by_type(entity)
+        self._update_by_type(path, entity)
 
     @abstractmethod
-    def _update_by_type(self, entity):
+    def _update_by_type(self, path, entity):
         pass
 
     def update_attribute(self, path, name, value):
         cuds_object = self.get(path)
         setattr(cuds_object, name, value)
         if self._ran:
-            self._update_by_type(cuds_object)
+            self._update_by_type(path, cuds_object)
