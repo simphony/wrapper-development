@@ -6,7 +6,10 @@ For this, the general folder and file structure of a wrapper is simulated here, 
 
 ## Contact
 [Pablo de Andres](mailto:pablo.de.andres@iwm.fraunhofer.de)
+
 [Matthias Urban](mailto:matthias.urban@iwm.fraunhofer.de)
+
 [Yoav Nahshon](mailto:yoav.nahshon@iwm.fraunhofer.de)
+
 Material Informatics team, Fraunhofer IWM.
 
