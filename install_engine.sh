@@ -1,0 +1,35 @@
+#!/bin/bash
+#
+# Author: Contact info
+#
+# Description: This script installs some engine and its Python binding
+#              Used as part of the installation for some wrapper.
+#
+# Run Information: This script is run manually.
+
+###################################
+### Install engine requirements ###
+###################################
+./install_engine_requirements.sh
+
+################################
+### Download necessary files ###
+################################
+git clone this_or_that 
+
+############################
+### Perform installation ###
+############################
+mkdir something maybe
+
+################
+### Clean up ###
+################
+rm -rf something maybe
+
+#########################
+### Test installation ###
+#########################
+echo "It works!"
+# or
+echo "It doesn't!"

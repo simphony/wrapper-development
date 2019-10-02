@@ -1,0 +1,15 @@
+---
+Version: "1.0"
+Author: Contact info
+Purpose: Defines the minimal requirements for some back-end
+
+Schema:
+
+  CUBA.SOME_WRAPPER:
+    CUBA.SOME_RELATIONSHIP:
+      CUBA.SOME_ENTITY:
+        cardinality: 1
+      CUBA.SOME_OTHER_ENTITY:
+        cardinality: 1+
+      CUBA.YET_ANOTHER:
+        cardinality: 1-3
