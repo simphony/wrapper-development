@@ -1,0 +1,8 @@
+__pycache__/
+build/
+dist/
+*~*
+.mypy_cache/
+coverage.xml
+.coverage
+# You can add your own things here

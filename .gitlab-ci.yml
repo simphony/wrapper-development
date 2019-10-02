@@ -1,0 +1,9 @@
+# Here you can configure your own Continuous Integration script
+
+stages:
+  - some_stage
+
+some_job:
+  stage: some_stage
+  script:
+    - some_tasks
