@@ -238,10 +238,50 @@ This methods will call a syntactic layer instance (`_engine` in the `WrapperSess
 
 Since the syntactic layer will greatly depend on the specific back-end, no standardisation is provided there.
 
+## Relevant files
+ - *.gitignore* 
+   - Files to be ignored by git when looking for changes.
+ - *.gitlab-ci.yml* 
+   - Configuration file for Gitlab's Continuous Integration system.
+ - *README.md* 
+   - Contains the general description and usage of the wrapper
+ - *install_engine.sh*
+   - Performs all the necessary installations to connect with Python to the back-end
+   - Is triggered by the user when installing (`TODO`: Check this)
+ - *install_engine_requirements.sh* 
+   - Install the third party requirements of the engine.
+   - Might require super user privileges.
+   - Called by `install_engine.sh`.
+ - *packageinfo.py* 
+   - Version and build information.
+ - *setup.py* 
+   - Installs the wrapper via `setuptools`.
+   - Called by the user with `python setup.py install`
+ - *examples/* 
+   - Examples of usage of the wrapper.
+ - *tests/* 
+   - Unittesting of the wrapper
+ - *some_wrapper/*
+   - *some_database|simulation_session.py* 
+     - Implements all the necessary methods and functionality of the wrapper.
+     - May use other classes or files if necessary
+   - *schema.some_wrapper.py* 
+     - Defines the minimal requirements that the back-end may have.
+     - Will be used to check the input before sending data to the engine to avoid inconsistencies.
+
+## Installation
+When the implementation of the wrapper is done, the user should be able to install all the necessary components via:
+
+```shell
+user@computer:~/some_wrapper$ ./install_engine.sh
+user@computer:~/some_wrapper$ python setup.py install
+```
+The first command will install the necessary libraries and dependencies so that the wrapper can connect and communicate to the syntactic layer (compile the engine as a shared library, install some python bindings...).
+
+The second call will install the wrapper itself, as well as any python packages it might require (install_requires).
+
 ## Contact
 [Pablo de Andres](mailto:pablo.de.andres@iwm.fraunhofer.de), 
 [Matthias Urban](mailto:matthias.urban@iwm.fraunhofer.de) and 
 [Yoav Nahshon](mailto:yoav.nahshon@iwm.fraunhofer.de) from the 
 Material Informatics team, Fraunhofer IWM.
-
-
