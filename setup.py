@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 from packageinfo import VERSION, NAME
 
 # Read description
-with open('README.rst', 'r') as readme:
+with open('README.md', 'r') as readme:
     README_TEXT = readme.read()
 
 
@@ -18,11 +18,10 @@ setup(
     long_description=README_TEXT,
     install_requires=[
         'simphony>=3.0.0',
-        'unittest2',
     ],
     packages=find_packages(),
-    test_suite='wrapper.testing',
+    test_suite='tests',
     entry_points={
         'wrappers':
-            'wrapper = wrapper.wrapper_session:WrapperSession'},
+            'wrapper = wrapper.some_simulation_session:SomeSimulationSession'},
 )
