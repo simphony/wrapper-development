@@ -5,11 +5,15 @@ For this, the general folder and file structure of a wrapper is simulated here, 
 ## Structure
 The general structure of a local wrapper is:
 
+![PlantUML graph](img/local_wrapper.png "Local 3.0 Wrapper")
+<details>
+  <summary>PlantUML code</summary>
+
 ```plantuml
   @startuml
   allow_mixing
   skinparam packageStyle rectangle
-  title LOCAL CUDS 3.0
+  title LOCAL 3.0 WRAPPER
   actor User
 
   namespace SemanticLayer {
@@ -114,9 +118,16 @@ The general structure of a local wrapper is:
 
   @enduml
 ```
+
+</details>
+
 When support for a new engine is to be added, the wrapper developer has to implement a new Session object and connect it to a syntactic layer that communicates with said engine.
 
 To organise this, an inheritance scheme of Session classes is defined:
+
+![PlantUML graph](img/session_inheritance_scheme.png "Session Inheritance Scheme")
+<details>
+  <summary>PlantUML code</summary>
 
 ```plantuml
   @startuml
@@ -231,6 +242,7 @@ To organise this, an inheritance scheme of Session classes is defined:
 
   @enduml
 ```
+</details>
 
 As you can see, supporting a new back-end means creating a class that inherits from the proper type of engine, and implementing some pre-defined abstract methods.
 
