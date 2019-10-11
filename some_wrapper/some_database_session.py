@@ -12,7 +12,7 @@ from cuds.session.db.db_wrapper_session import DbWrapperSession
 
 class SomeDatabaseSession(DbWrapperSession):
     """
-    Session class for some SQL DB.
+    Session class for some DB.
     """
 
     def __init__(self, engine=None, **kwargs):
