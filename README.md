@@ -3,17 +3,17 @@ The aim of this project is to explain the structure of a Wrapper for SimPhoNy v3
 For this, the general folder and file structure of a wrapper is simulated here, and notes on what to do (and where) are provided.
 
 ## Important (utility) functions for wrapper development
-- cuds.utils.create_for_session
+- cuds.utils.create_for_session() \
   Create a cuds object directly in a given session.
   Avoids side effects, like creating the cuds object first in the CoreSession and removing other cuds.
   Avoids issues like having the same object twice with same uid.
-- cuds.classes.cuds.Cuds.get_attributes
+- cuds.classes.cuds.Cuds.get_attributes() \
   Get the attributes of a cuds object
-- cuds.classes.cuds.Cuds.get_datatypes
+- cuds.classes.cuds.Cuds.get_datatypes() \
   Get the datatypes of the cuds objects attributes
-- cuds.ontology.ontology_datatypes.convert_from:
+- cuds.ontology.ontology_datatypes.convert_from() \
   Convert attributes to a serializable format.
-- cuds.ontology.ontology_datatypes.convert_to:
+- cuds.ontology.ontology_datatypes.convert_to() \
   Convert attributes from a serializable format to the real datatype.
 
 ## Structure
