@@ -5,4 +5,5 @@ dist/
 .mypy_cache/
 coverage.xml
 .coverage
+.vscode
 # You can add your own things here
