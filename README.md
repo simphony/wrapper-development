@@ -70,4 +70,4 @@ either use a third party library to communicate with the engine or develop their
 
 **Note:**
 For an implementation of these layers, you can check the
-`cuds-2.0 branch of Simlammps <https://gitlab.cc-asp.fraunhofer.de/simphony/wrappers/simlammps/tree/cuds-2.0>`_.
+[cuds-2.0 branch of Simlammps](https://gitlab.cc-asp.fraunhofer.de/simphony/wrappers/simlammps/tree/cuds-2.0).
