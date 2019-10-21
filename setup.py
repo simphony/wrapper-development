@@ -17,7 +17,7 @@ setup(
     keywords='simphony, cuds, Fraunhofer IWM, wrappers',
     long_description=README_TEXT,
     install_requires=[
-        'simphony>=2.0.0',
+        'simphony==2.0.1',
     ],
     packages=find_packages(),
 )
