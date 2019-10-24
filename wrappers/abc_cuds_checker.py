@@ -21,7 +21,6 @@ class ABCCudsChecker(object, metaclass=ABCMeta):
 
         :param cuds_object: the cuds object to be checked
         """
-        pass
 
     @staticmethod
     def _check_equal_amount(cuds_object, cuba_key, expected_amount):

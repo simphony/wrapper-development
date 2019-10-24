@@ -35,15 +35,22 @@ class ABCInteroperabilityLayer(object, metaclass=ABCMeta):
         self._update_cuds_after_run()
 
     def _check_cuds(self):
+        """
+        Checks the consistency of the cuds through the checker
+        """
         self._cuds_checker.check_all(self._cuds)
 
     @abstractmethod
     def _run_engine(self):
-        pass
+        """
+        Calls the run method in the engine
+        """
 
     @abstractmethod
     def _update_cuds_after_run(self):
-        pass
+        """
+        Updates the cuds with the data from the engine after a run
+        """
 
     def get(self, path):
         """
@@ -71,11 +78,18 @@ class ABCInteroperabilityLayer(object, metaclass=ABCMeta):
 
     @abstractmethod
     def _add_by_type(self, entity):
-        pass
+        """
+        Adds an entity to the engine based on its type.
+
+        :param entity: entity to add
+        """
 
     @abstractmethod
     def _add_whole_cuds(self):
-        pass
+        """
+        Adds the full cuds to the engine.
+        This method is called before the first run
+        """
 
     def remove(self, path):
         """
@@ -90,18 +104,40 @@ class ABCInteroperabilityLayer(object, metaclass=ABCMeta):
 
     @abstractmethod
     def _remove_by_type(self, entity):
-        pass
+        """
+        Removes an entity from the engine based on its type.
+
+        :param entity: entity to remove
+        """
 
     def update(self, path, entity):
+        """
+        Updates an entity given the path to it.
+
+        :param path: list of uuids to the entity
+        :param entity: updated version of the entity
+        """
         # Update internal cuds
         self.get(path).update(entity)
         self._update_by_type(path, entity)
 
     @abstractmethod
     def _update_by_type(self, path, entity):
-        pass
+        """
+        Updates an entity in the engine based on its type.
+
+        :param entity: entity to update
+        """
 
     def update_attribute(self, path, name, value):
+        """
+        Updates the attributes from an entity.
+        This method is called when an attribute is changed via setattr()
+
+        :param path: list of uuids to the entity
+        :param name: name of the attribute
+        :param value: value of the attribute
+        """
         cuds_object = self.get(path)
         setattr(cuds_object, name, value)
         if self._ran:

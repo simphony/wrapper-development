@@ -1,6 +1,6 @@
 # Wrapper SDK
 This project contains the common functionality needed for developing a wrapper
-for SimPhoNy.
+for __SimPhoNy v2__.
 
 This comes in the form of `Abstract Basic Classes` that the developers of
 new wrappers will have to implement.
@@ -12,7 +12,7 @@ No parts of this software may be used outside of this context.
 No redistribution is allowed without explicit written permission.
 
 ## Requirements
-- simphony>=2.0.0
+- simphony==2.0.1
 
 ## Wrapper development
 
@@ -41,7 +41,7 @@ for the first time, the cuds object is checked and sent to the engine through th
 syntactic layer. Thus, the user can either provide a pre-built cuds object or
 build it by adding to the engine.
 
-After the simulation is ran, the internal copy is updated.
+After the simulation is run, the internal copy is updated.
 
 In this layer, the different API operations will have different behaviours based
 on the CUBA type of the subject. Hence, the interoperability between semantic
@@ -58,9 +58,11 @@ and the type of simulation. For this reason, the developer has to redefine the
 
 - `check_equal_amount(cuds_object, cuba_key, expected_amount)`:
    checks that a certain object has an expected amount of elements of a certain type.
+   e.g. `self._check_equal_amount(cuds_object, CUBA.VELOCITY, 1)`
 - `check_children(cuds_object, cuba_key, child_value_pairs)`:
    checks that the subelements of a specific type have a certain number of
    elements of a certain type.
+   e.g. `self._check_children(cuds_object, CUBA.PERSON, [(CUBA.HEART, 1), (CUBA.BRAIN, 1)])`
 
 
 ### Syntactic layer
