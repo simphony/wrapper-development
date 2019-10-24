@@ -13,6 +13,7 @@ platform=$(python -mplatform)
 case $platform in
   *"Ubuntu"*)
     sudo apt-get update
+    # Add commands for Ubuntu here
   ;;
   # Add other platforms here
 esac

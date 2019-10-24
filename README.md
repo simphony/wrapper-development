@@ -1,5 +1,5 @@
 # Wrapper Development
-The aim of this project is to explain the structure of a Wrapper for SimPhoNy v3 and simplify as much as possible the development of a new one.
+The aim of this project is to explain the structure of a Wrapper for __SimPhoNy v3__ and simplify as much as possible the development of a new one.
 For this, the general folder and file structure of a wrapper is simulated here, and notes on what to do (and where) are provided.
 
 ## Important (utility) functions for wrapper development
