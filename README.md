@@ -2,6 +2,16 @@
 The aim of this project is to explain the structure of a Wrapper for __SimPhoNy v3__ and simplify as much as possible the development of a new one.
 For this, the general folder and file structure of a wrapper is simulated here, and notes on what to do (and where) are provided.
 
+## Compatibility
+
+The following table describes the version compatability between the [OSP core](https://gitlab.cc-asp.fraunhofer.de/simphony/osp-core) package and documentation presented in this project.
+
+| __SQLAlchemy wrapper__ | __OSP core__ |
+|   :---:   |   :---:  |
+|   2.0.0   |   3.1.x-beta  |
+
+The releases of OSP core are available [here](https://gitlab.cc-asp.fraunhofer.de/simphony/osp-core/-/releases).
+
 ## Important (utility) functions for wrapper development
 - cuds.utils.create_for_session() \
   Create a cuds object directly in a given session.
