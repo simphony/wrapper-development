@@ -2,9 +2,7 @@
 
 # TODO: Import the python connection to the engine
 
-import cuds.classes
-from cuds.classes import CUBA
-from cuds.session.sim_wrapper_session import SimWrapperSession
+from osp.core.session import SimWrapperSession
 
 
 class SomeSimulationSession(SimWrapperSession):

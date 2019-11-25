@@ -7,7 +7,7 @@
 
 # TODO: Import the python connection to the DB
 
-from cuds.session.db.db_wrapper_session import DbWrapperSession
+from osp.core.session import DbWrapperSession
 
 
 class SomeDatabaseSession(DbWrapperSession):
