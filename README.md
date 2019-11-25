@@ -13,18 +13,7 @@ The following table describes the version compatability between the [OSP core](h
 The releases of OSP core are available [here](https://gitlab.cc-asp.fraunhofer.de/simphony/osp-core/-/releases).
 
 ## Important (utility) functions for wrapper development
-- cuds.utils.create_for_session() \
-  Create a cuds object directly in a given session.
-  Avoids side effects, like creating the cuds object first in the CoreSession and removing other cuds.
-  Avoids issues like having the same object twice with same uid.
-- cuds.classes.cuds.Cuds.get_attributes() \
-  Get the attributes of a cuds object
-- cuds.classes.cuds.Cuds.get_datatypes() \
-  Get the datatypes of the cuds objects attributes
-- cuds.ontology.ontology_datatypes.convert_from() \
-  Convert attributes to a serializable format.
-- cuds.ontology.ontology_datatypes.convert_to() \
-  Convert attributes from a serializable format to the real datatype.
+See osp.core.utils.wrapper_development
 
 ## Structure
 The general structure of a local wrapper is:
