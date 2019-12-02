@@ -1,37 +1,52 @@
 # Wrapper Development
+*Version*: 2.1.0
+
 The aim of this project is to explain the structure of a Wrapper for __SimPhoNy v3__ and simplify as much as possible the development of a new one.
 For this, the general folder and file structure of a wrapper is simulated here, and notes on what to do (and where) are provided.
 
+We **strongly** recommend going through [getting started](https://gitlab.cc-asp.fraunhofer.de/simphony/getting-started)
+before proceeding with this guide.
+
+*Contact*: [Pablo de Andres](mailto:pablo.de.andres@iwm.fraunhofer.de), 
+[Matthias Urban](mailto:matthias.urban@iwm.fraunhofer.de) and 
+[Yoav Nahshon](mailto:yoav.nahshon@iwm.fraunhofer.de) from the 
+Material Informatics team, Fraunhofer IWM.
+
+**Index**
+- [Wrapper Development](#wrapper-development)
+  - [Compatibility](#compatibility)
+  - [Structure](#structure)
+  - [Relevant files](#relevant-files)
+  - [Important (utility) functions for wrapper development](#important-utility-functions-for-wrapper-development)
+  - [Installation](#installation)
+
 ## Compatibility
 
-The following table describes the version compatability between the [OSP core](https://gitlab.cc-asp.fraunhofer.de/simphony/osp-core) package and documentation presented in this project.
+The following table describes the version compatibility between the [OSP core](https://gitlab.cc-asp.fraunhofer.de/simphony/osp-core) package and documentation presented in this project.
 
-| __SQLAlchemy wrapper__ | __OSP core__ |
-|   :---:   |   :---:  |
-|   2.0.0   |   3.1.x-beta  |
+| __Wrapper development__ | __OSP core__ |
+|:-----------------------:|:------------:|
+|          2.1.0          |  3.2.x-beta  |
+|          2.0.0          |  3.1.x-beta  |
 
 The releases of OSP core are available [here](https://gitlab.cc-asp.fraunhofer.de/simphony/osp-core/-/releases).
 
-## Important (utility) functions for wrapper development
-See osp.core.utils.wrapper_development
-
 ## Structure
-The general structure of a local wrapper is:
+Here we want to provide some more background on the internal design of osp-core 
+and the wrappers.
 
-![PlantUML graph](img/local_wrapper.png "Local 3.0 Wrapper")
-<details>
-  <summary>PlantUML code</summary>
+If you remember from *getting started*, we presented an architecture that follows 3 layers (i.e. semantic, interoperability and syntactic).
+
+Now we will add some more detail on how the 3 layers interact with each other:
 
 ```plantuml
   @startuml
   allow_mixing
-  skinparam packageStyle rectangle
-  title LOCAL 3.0 WRAPPER
   actor User
 
-  namespace SemanticLayer {
+  rectangle SemanticLayer {
 
-   class Cuds <dict> {
+   class Cuds {
     Session session
     UUID uuid
     CUBA cuba_key
@@ -44,7 +59,7 @@ The general structure of a local wrapper is:
    }
   }
 
-  namespace InteroperabilityLayer {
+  rectangle InteroperabilityLayer {
 
    class Registry <dict> {
    }
@@ -57,10 +72,7 @@ The general structure of a local wrapper is:
     sync() : void
    }
 
-   class CoreSession implements InteroperabilityLayer.Session {
-   }
-
-   abstract class WrapperSession extends InteroperabilityLayer.Session {
+   class SomeWrapperSession implements Session {
     List added
     List updated
     List removed
@@ -69,33 +81,30 @@ The general structure of a local wrapper is:
    }
   }
 
-  namespace SyntacticLayer {
+  rectangle SyntacticLayer {
     class SyntacticLayer {
     }
   }
 
-  database Engine
+  database backend
 
 
   ' -----------------------
   ' ------ RELATIONS ------
   ' -----------------------
+  User -> Cuds : interacts_with
 
-  User -> SemanticLayer.Cuds : interacts_with
+  Cuds -> Session : has_a
+  Session -> Registry : manages
 
-  SemanticLayer.Cuds -> InteroperabilityLayer.Session : has_a
-  InteroperabilityLayer.Session -> InteroperabilityLayer.Registry : manages
+  SomeWrapperSession -> SyntacticLayer : manages
 
-  InteroperabilityLayer.WrapperSession -> SyntacticLayer.SyntacticLayer : manages
-
-  SyntacticLayer.SyntacticLayer -> Engine : acts_on
-
+  SyntacticLayer -> backend : acts_on
 
   ' -----------------------
   ' -------- NOTES --------
   ' -----------------------
-
-  note top of SemanticLayer.Cuds
+  note top of Cuds
    This will be shallow structure with 
    the uuids of the contained elements:
    {
@@ -105,16 +114,16 @@ The general structure of a local wrapper is:
     }
   end note
 
-  note top of InteroperabilityLayer.Session
+  note top of Session
    Provides the info requested to Cuds
   end note
 
-  note top of InteroperabilityLayer.WrapperSession
+  note top of SomeWrapperSession
    Updates the registry with information
    from the back-end and vice versa.
   end note
 
-  note top of InteroperabilityLayer.Registry
+  note top of Registry
    Flat structure that contains all the
    objects accessible through their uid:
    {
@@ -124,31 +133,35 @@ The general structure of a local wrapper is:
     }
   end note
 
-  note top of SyntacticLayer.SyntacticLayer
+  note top of SyntacticLayer
    Connects to the engine and
    knows its specific API
   end note
-
   @enduml
 ```
 
+<details>
+  <summary>Alternative image</summary>
+
+  ![PlantUML graph](img/local_wrapper.png "Local 3.0 Wrapper")
+
 </details>
+
+We have introduced the interoperability layer as the one that synchronises the changes between the backend and the semantic layer.
+This makes the interoperability layer, and particularly the session class,
+one of most important (if not the most) developments in a wrapper.
 
 When support for a new engine is to be added, the wrapper developer has to implement a new Session object and connect it to a syntactic layer that communicates with said engine.
 
-To organise this, an inheritance scheme of Session classes is defined:
+Since the syntactic layer will greatly depend on the specific backend, no standardisation is provided there.
 
-![PlantUML graph](img/session_inheritance_scheme.png "Session Inheritance Scheme")
-<details>
-  <summary>PlantUML code</summary>
+Regarding the sessions, we already presented a simple hierarchy meant to group functionality.
+This schema gains importance in the context of wrapper development, so we will provide a deeper representation:
+
 
 ```plantuml
   @startuml
-  allow_mixing
-  skinparam packageStyle rectangle
-  title Session inheritance scheme
-
-  namespace "OSP-Core repo" as OSP {
+  rectangle "OSP-Core" as OSP {
     abstract class Session {
       Registry : registry
       --
@@ -235,35 +248,37 @@ To organise this, an inheritance scheme of Session classes is defined:
     }
   }
 
-  namespace "Sqlite wrapper repo" as sqlite {
-    class SqliteWrapperSession implements OSP.SqlWrapperSession {
+  rectangle "Sqlite wrapper" as sqlite {
+    class SqliteWrapperSession implements SqlWrapperSession {
     }
   }
 
-  namespace "SqlAlchemy wrapper repo" as sqlalchemy {
-    class SqlAlchemyWrapperSession implements OSP.SqlWrapperSession {
+  rectangle "SqlAlchemy wrapper" as sqlalchemy {
+    class SqlAlchemyWrapperSession implements SqlWrapperSession {
     }
   }
 
-  namespace "Simlammps repo" as simlammps {
-    class SimlammpsSession implements OSP.SimWrapperSession {
+  rectangle "Simlammps" as simlammps {
+    class SimlammpsSession implements SimWrapperSession {
     }
   }
-  ' -----------------------
-  ' -------- NOTES --------
-  ' -----------------------
-
   @enduml
 ```
+
+<details>
+  <summary>Alternative image</summary>
+
+  ![PlantUML graph](img/session_inheritance_scheme.png "Session Inheritance Scheme")
+
 </details>
 
 As you can see, supporting a new back-end means creating a class that inherits from the proper type of engine, and implementing some pre-defined abstract methods.
 
 This methods will call a syntactic layer instance (`_engine` in the `WrapperSession`) that will communicate to the back-end.
 
-Since the syntactic layer will greatly depend on the specific back-end, no standardisation is provided there.
-
 ## Relevant files
+These are important files when developing a new wrapper.
+We present examples and hints on how to write them in this repository:
  - *.gitignore* 
    - Files to be ignored by git when looking for changes.
  - *.gitlab-ci.yml* 
@@ -272,7 +287,7 @@ Since the syntactic layer will greatly depend on the specific back-end, no stand
    - Contains the general description and usage of the wrapper
  - *install_engine.sh*
    - Performs all the necessary installations to connect with Python to the back-end
-   - Is triggered by the user when installing (`TODO`: Check this)
+   - Must be triggered by the user when installing
  - *install_engine_requirements.sh* 
    - Install the third party requirements of the engine.
    - Might require super user privileges.
@@ -294,19 +309,16 @@ Since the syntactic layer will greatly depend on the specific back-end, no stand
      - Defines the minimal requirements that the back-end may have.
      - Will be used to check the input before sending data to the engine to avoid inconsistencies.
 
+## Important (utility) functions for wrapper development
+See [osp.core.utils.wrapper_development](https://gitlab.cc-asp.fraunhofer.de/simphony/osp-core/blob/master/osp/core/utils/wrapper_development.py)
+
 ## Installation
 When the implementation of the wrapper is done, the user should be able to install all the necessary components via:
 
 ```shell
-user@computer:~/some_wrapper$ ./install_engine.sh
-user@computer:~/some_wrapper$ python setup.py install
+(env) user@computer:~/some_wrapper$ ./install_engine.sh
+(env) user@computer:~/some_wrapper$ python setup.py install
 ```
 The first command will install the necessary libraries and dependencies so that the wrapper can connect and communicate to the syntactic layer (compile the engine as a shared library, install some python bindings...).
 
 The second call will install the wrapper itself, as well as any python packages it might require (install_requires).
-
-## Contact
-[Pablo de Andres](mailto:pablo.de.andres@iwm.fraunhofer.de), 
-[Matthias Urban](mailto:matthias.urban@iwm.fraunhofer.de) and 
-[Yoav Nahshon](mailto:yoav.nahshon@iwm.fraunhofer.de) from the 
-Material Informatics team, Fraunhofer IWM.
