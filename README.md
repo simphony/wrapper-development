@@ -26,7 +26,7 @@ The following table describes the version compatibility between the [OSP core](h
 
 | __Wrapper development__ | __OSP core__ |
 |:-----------------------:|:------------:|
-|          2.2.0          |  3.2.2-beta  |
+|          2.2.0          |  3.3.x-beta  |
 |          2.1.0          |  3.2.0-beta  |
 |          2.0.0          |  3.1.x-beta  |
 
