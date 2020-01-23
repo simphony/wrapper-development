@@ -26,7 +26,8 @@ The following table describes the version compatibility between the [OSP core](h
 
 | __Wrapper development__ | __OSP core__ |
 |:-----------------------:|:------------:|
-|          2.1.0          |  3.2.x-beta  |
+|          2.2.0          |  3.2.2-beta  |
+|          2.1.0          |  3.2.0-beta  |
 |          2.0.0          |  3.1.x-beta  |
 
 The releases of OSP core are available [here](https://gitlab.cc-asp.fraunhofer.de/simphony/osp-core/-/releases).
@@ -174,33 +175,33 @@ This schema gains importance in the context of wrapper development, so we will p
     }
 
     class CoreSession implements Session {
+      --
+      load(*uids) : Iterator<Cuds>
     }
 
     abstract class WrapperSession extends Session {
-      _engine
-      _forbid_buffer_reset_by
+      Engine: _engine
+      String: _forbid_buffer_reset_by
+      Set : _expired
+      Dict : _added
+      Dict : _updated
+      Dict : _deleted
       --
+      expire(*cuds_or_uids) : void
+      expire_all() : void()
+      refresh(*cuds_or_uids) : void
       _apply_added() : void
       _apply_updated() : void
       _apply_deleted() : void
       _notify_delete(cuds_object) : void
       _notify_update(cuds_object) : void
+      _notify_read(cuds_object) : void
       _reset_buffers(changed_by) : bool
       _check_cardinalities() : void
-    }
-
-    abstract class StorageWrapperSession extends WrapperSession {
-      Set : _expired
-      --
-      load(*uids) : Iterator<Cuds>
-      expire(*cuds_or_uids) : void
-      expire_all() : void()
-      refresh(*cuds_or_uids) : void
-      _notify_read(cuds_objects) : void
       {abstract}_load_from_backend(uids) : void
     }
 
-    class TransportSession extends StorageWrapperSession {
+    class TransportSession extends WrapperSession {
       CommunicationEngineServer : com_facility
       Session : session_cls
       dict : session_objs
@@ -210,7 +211,7 @@ This schema gains importance in the context of wrapper development, so we will p
       handle_request(command, data, user) : str
     }
 
-    abstract class DbWrapperSession extends StorageWrapperSession {
+    abstract class DbWrapperSession extends WrapperSession {
       --
       commit() : void
       load_by_cuba_key(cuba_key, update_registry) : Iterator<Cuds>
@@ -301,7 +302,7 @@ We present examples and hints on how to write them in this repository:
    - Examples of usage of the wrapper.
  - *tests/* 
    - Unittesting of the wrapper
- - *some_wrapper/*
+ - *osp/wrappers/some_wrapper/*
    - *some_database|simulation_session.py* 
      - Implements all the necessary methods and functionality of the wrapper.
      - May use other classes or files if necessary
