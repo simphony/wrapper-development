@@ -20,16 +20,14 @@ git clone this_or_that
 ############################
 ### Perform installation ###
 ############################
-mkdir something maybe
+mkdir something_maybe
 
 ################
 ### Clean up ###
 ################
-rm -rf something maybe
+rm -rf something_maybe
 
 #########################
 ### Test installation ###
 #########################
-echo "It works!"
-# or
-echo "It doesn't!"
+echo "It works!" | echo "It doesn't!"

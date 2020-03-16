@@ -35,7 +35,7 @@ class SomeDatabaseSession(DbWrapperSession):
 
     # OVERRIDE
     def _init_transaction(self):
-        # TODO initialize the transaction
+        # TODO initialise the transaction
         pass
 
     # OVERRIDE
@@ -44,7 +44,7 @@ class SomeDatabaseSession(DbWrapperSession):
         pass
 
     # OVERRIDE
-    def _initialize(self):
+    def _initialise(self):
         # TODO load by cuba key
         pass
 
