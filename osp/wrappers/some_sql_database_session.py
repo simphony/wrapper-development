@@ -35,7 +35,7 @@ class SomeDatabaseSession(SqlWrapperSession):
 
     # OVERRIDE
     def _init_transaction(self):
-        # TODO initialize the transaction
+        # TODO initialise the transaction
         pass
 
     # OVERRIDE
