@@ -26,7 +26,12 @@ class SomeSimulationSession(SimWrapperSession):
     # OVERRIDE
     def _load_from_backend(self, uids, expired=None):
         """Loads the cuds object from the simulation engine"""
-        #  TODO load cuds objects from the backend
+        print("WARNING: please override _load_from_backend method of your session")
+        for uid in uids:
+            if uid in self._registry:
+                yield self._registry[uid]
+            else:
+                yield None
 
     # OVERRIDE
     def _apply_added(self, root_obj, buffer):

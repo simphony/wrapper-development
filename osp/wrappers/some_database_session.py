@@ -83,4 +83,9 @@ class SomeDatabaseSession(DbWrapperSession):
 
     def _load_from_backend(self, uids, expired=None):
         # TODO load cuds objects from the backend
-        pass
+        print("WARNING: please override _load_from_backend method of your session")
+        for uid in uids:
+            if uid in self._registry:
+                yield self._registry[uid]
+            else:
+                yield None
