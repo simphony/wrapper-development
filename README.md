@@ -4,7 +4,7 @@
 The aim of this project is simplify as much as possible the development of a new Wrapper for __SimPhoNy v3__.
 For this, the general folder and file structure of a wrapper is simulated here, and notes on what to do are provided.
 
-We **strongly** recommend going through the [documentation](https://simphony.pages.fraunhofer.de/documentation/latest/)
+We **strongly** recommend going through the [documentation](https://simphony.readthedocs.io/)
 (in particular the wrapper development section) first.
 
 *Contact*: [Pablo de Andres](mailto:pablo.de.andres@iwm.fraunhofer.de), 
@@ -23,4 +23,4 @@ The following table describes the version compatibility between the [OSP core](h
 |          2.1.0          |  3.2.x-beta  |
 |          2.0.0          |  3.1.x-beta  |
 
-The releases of OSP core are available [here](https://gitlab.cc-asp.fraunhofer.de/simphony/osp-core/-/releases).
+The releases of OSP core are available [here](https://github.com/simphony/osp-core/releases).
