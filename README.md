@@ -25,3 +25,5 @@ The following table describes the version compatibility between the [OSP core](h
 |          2.0.0          |  3.1.x-beta  |
 
 The releases of OSP core are available [here](https://github.com/simphony/osp-core/releases).
+
+In `osp/wrappers/simple_simulation` you will find a minimalistic wrapper with the required elements implemented.

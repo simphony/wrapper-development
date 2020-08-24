@@ -1,0 +1,80 @@
+---
+version: 0.0.2
+author: Me
+namespace: simple_ontology
+
+ontology:
+
+  Atom:
+    subclass_of:
+    - cuba.Class
+    - simple_ontology.hasPart:
+        cardinality: some
+        exclusive: false
+        range: simple_ontology.Position
+    - simple_ontology.hasPart:
+        cardinality: some
+        exclusive: false
+        range: simple_ontology.Velocity
+
+  Material:
+    subclass_of:
+    - cuba.Class
+    - simple_ontology.hasPart:
+        cardinality: some
+        exclusive: true
+        range: simple_ontology.Atom
+
+  PhysicalQuantity:
+    attributes:
+      simple_ontology.unit: null
+      simple_ontology.value: null
+    subclass_of:
+    - cuba.Class
+
+  Position:
+    subclass_of:
+    - simple_ontology.PhysicalQuantity
+
+  Velocity:
+    subclass_of:
+    - simple_ontology.PhysicalQuantity
+
+  Wrapper:
+    subclass_of:
+    - cuba.Wrapper
+    - simple_ontology.hasPart:
+        cardinality: some
+        exclusive: true
+        range: simple_ontology.Material
+
+  encloses:
+    inverse: simple_ontology.isEnclosedBy
+    subclass_of:
+    - cuba.activeRelationship
+
+  hasPart:
+    default_rel: true
+    inverse: simple_ontology.isPartOf
+    subclass_of:
+    - simple_ontology.encloses
+
+  isEnclosedBy:
+    inverse: simple_ontology.encloses
+    subclass_of:
+    - cuba.passiveRelationship
+
+  isPartOf:
+    inverse: simple_ontology.hasPart
+    subclass_of:
+    - simple_ontology.isEnclosedBy
+
+  unit:
+    datatype: STRING
+    subclass_of:
+    - cuba.attribute
+
+  value:
+    datatype: VECTOR:3
+    subclass_of:
+    - cuba.attribute
