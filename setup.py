@@ -19,7 +19,7 @@ setup(
     install_requires=[
         'simphony>=3.0.0',
     ],
-    packages=find_packages(),
+    packages=find_packages(exclude=("examples", "tests")),
     test_suite='tests',
     entry_points={
         'wrappers':
