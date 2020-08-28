@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-from packageinfo import VERSION, NAME
+from packageinfo import VERSION, NAME, OSP_CORE_MIN, OSP_CORE_MAX
 
 # Read description
 with open('README.md', 'r') as readme:
@@ -17,11 +17,11 @@ setup(
     keywords='simphony, cuds, something',
     long_description=README_TEXT,
     install_requires=[
-        'simphony>=3.0.0',
+        'osp-core>=' + OSP_CORE_MIN + ', <' + OSP_CORE_MAX,
     ],
-    packages=find_packages(),
+    packages=find_packages(exclude=("examples", "tests")),
     test_suite='tests',
     entry_points={
         'wrappers':
-            'wrapper = wrapper.some_simulation_session:SomeSimulationSession'},
+            'wrapper = osp.wrappers.some_simulation_session:SomeSimulationSession'},
 )
