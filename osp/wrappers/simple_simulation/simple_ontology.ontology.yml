@@ -7,7 +7,7 @@ ontology:
 
   Atom:
     subclass_of:
-    - cuba.Class
+    - cuba.Entity
     - simple_ontology.hasPart:
         cardinality: some
         exclusive: false
@@ -19,7 +19,7 @@ ontology:
 
   Material:
     subclass_of:
-    - cuba.Class
+    - cuba.Entity
     - simple_ontology.hasPart:
         cardinality: some
         exclusive: true
@@ -30,7 +30,7 @@ ontology:
       simple_ontology.unit: null
       simple_ontology.value: null
     subclass_of:
-    - cuba.Class
+    - cuba.Entity
 
   Position:
     subclass_of:
