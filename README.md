@@ -14,10 +14,10 @@ developed. You can find templates of the session classes for other kinds of
 wrappers in `osp/wrappers`.
 
 The version number of this project matches the version number of OSP-core 
-for which it was last updated. As OSP-core follows the [Semver]
-(https://semver.org/) versioning convention, this wrapper development 
-prototype should be compatible with the newest version of OSP-core as long 
-as their major version numbers match.
+for which it was last updated. As OSP-core follows the 
+[Semantic Versioning](https://semver.org/) convention, this wrapper 
+development prototype should be compatible with the newest version of OSP-core 
+as long as their major version numbers match.
 
 *Contact*: [Pablo de Andres](mailto:pablo.de.andres@iwm.fraunhofer.de), 
 [José Manuel Domínguez](mailto:jose.manuel.dominguez@iwm.fraunhofer.de) and 
