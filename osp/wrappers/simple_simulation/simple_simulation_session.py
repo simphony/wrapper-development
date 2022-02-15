@@ -4,18 +4,15 @@ from osp.core.namespaces import simple_ontology
 
 
 class SimpleSimulationSession(SimWrapperSession):
-    """
-    Session class for some engine.
-    """
+    """Session class for some engine."""
 
     def __init__(self, engine=None, **kwargs):
         super().__init__(engine or SimulationEngine(), **kwargs)
-        self.mapper = dict()  # maps uuid to index in the backend
+        self.mapper = dict()  # maps uid to index in the backend
 
     def __str__(self):
         return "Simple sample Wrapper Session"
 
-    # OVERRIDE
     def _apply_added(self, root_obj, buffer):
         """Adds the added cuds to the engine."""
         for obj in buffer.values():
@@ -25,7 +22,6 @@ class SimpleSimulationSession(SimWrapperSession):
                 vel = obj.get(oclass=simple_ontology.Velocity)[0].value
                 self._engine.add_atom(pos, vel)
 
-    # OVERRIDE
     def _apply_updated(self, root_obj, buffer):
         """Updates the updated cuds in the engine."""
         for obj in buffer.values():
@@ -42,11 +38,9 @@ class SimpleSimulationSession(SimWrapperSession):
                 idx = self.mapper[atom.uid]
                 self._engine.update_position(idx, obj.value)
 
-    # OVERRIDE
     def _apply_deleted(self, root_obj, buffer):
         """Deletes the deleted cuds from the engine."""
 
-    # OVERRIDE
     def _load_from_backend(self, uids, expired=None):
         """Loads the cuds object from the simulation engine"""
         for uid in uids:
@@ -69,7 +63,6 @@ class SimpleSimulationSession(SimWrapperSession):
 
                 yield obj
 
-    # OVERRIDE
     def _run(self, root_cuds_object):
         """Call the run command of the engine."""
         self._engine.run()

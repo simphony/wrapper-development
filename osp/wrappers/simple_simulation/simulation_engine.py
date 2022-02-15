@@ -1,7 +1,7 @@
-# This file contains simple code to emulate communication with an engine.
-# It acts like a dummy syntactic layer.
+# This file contains simple code to emulate communication with a simulation
+# engine. It acts like a dummy syntactic layer.
 
-class Atom():
+class Atom:
 
     def __init__(self, position, velocity):
         self.position = position
@@ -9,9 +9,7 @@ class Atom():
 
 
 class SimulationEngine:
-    """
-    Simple engine sample code.
-    """
+    """Simple engine sample code."""
 
     def __init__(self):
         self.atoms = list()
@@ -20,11 +18,11 @@ class SimulationEngine:
     def __str__(self):
         return "Some Engine Connection"
 
-    def run(self, timesteps=1):
+    def run(self, time_steps=1):
         """Call the run command of the engine."""
         print("Now the engine is running")
         for atom in self.atoms:
-            atom.position += atom.velocity * timesteps
+            atom.position += atom.velocity * time_steps
 
     def add_atom(self, position, velocity):
         """Add an atom to the engine.

@@ -1,9 +1,10 @@
-# This code runs on the wrapper under ../osp/wrappers/simple_simulation
+"""This code runs on the wrapper under `../osp/wrappers/simple_simulation`"""
+
+import numpy as np
 
 from osp.core.namespaces import simple_ontology
-from osp.wrappers.simple_simulation import SimpleSimulationSession
 from osp.core.utils import pretty_print
-import numpy as np
+from osp.wrappers.simple_simulation import SimpleSimulationSession
 
 m = simple_ontology.Material()
 for i in range(3):

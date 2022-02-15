@@ -8,61 +8,61 @@ class SomeDatabaseSession(SqlWrapperSession):
     Session class for some SQL DB.
     """
 
-    def __init__(self, engine=None, **kwargs):
+    def __init__(self, engine=None):
         # TODO instantiate or connect to the engine
-        super().__init__(engine=engine, **kwargs)
+        super().__init__(engine=engine)
 
     def __str__(self):
         # TODO define the output of str(SomeDatabaseSession)
         pass
 
-    # OVERRIDE
     def close(self):
         # TODO close the connection to the database
         pass
 
-    # OVERRIDE
     def _commit(self):
         # TODO commit the transaction
         pass
 
-    # OVERRIDE
     def _init_transaction(self):
         # TODO initialise the transaction
         pass
 
-    # OVERRIDE
     def _rollback_transaction(self):
         # TODO rollback the transaction
         pass
 
-    # OVERRIDE
-    def _db_select(self, table_name, columns, condition, datatypes):
+    def _db_select(self, query):
+        """Get data from the table of the given names.
+
+        Args:
+            query (SqlQuery): A object describing the SQL query.
+        """
         # TODO get data from the table by issuing a SELECT statement.
         pass
 
     # OVERRIDE
     def _db_create(self, table_name, columns, datatypes,
-                   primary_key, foreign_key, index):
+                   primary_key, generate_pk, foreign_key, indexes):
         # TODO create a table by issuing a CREATE TABLE statement.
         pass
 
-    # OVERRIDE
     def _db_insert(self, table_name, columns, values, datatypes):
         # TODO insert data to the table by issuing an INSERT statement.
         pass
 
-    # OVERRIDE
     def _db_update(self, table_name, columns, values, condition, datatypes):
         # TODO update data of the table by issuing an UPDATE statement.
         pass
 
-    # OVERRIDE
-    def _db_delete(self, table_name, condition):
+    def _db_delete(self, table_name):
         # TODO delete data from a table by issuing a DELETE statement.
         pass
 
-    # OVERRIDE
+    def _db_drop(self, table_name):
+        # TODO drop an entire table.
+        pass
+
     def _get_table_names(self, prefix):
         # TODO get all the table names with the given prefix.
         pass
