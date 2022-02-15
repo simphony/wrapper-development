@@ -1,27 +1,41 @@
-from setuptools import setup, find_packages
+"""Installation script for your wrapper.
 
-from packageinfo import VERSION, NAME, OSP_CORE_MIN, OSP_CORE_MAX
+This script is designed to work with setuptools. It defines the metadata and
+the files to be included in the Python package of your wrapper.
+
+We strongly encourage you to read the "Packaging Python Projects" tutorial,
+https://packaging.python.org/en/latest/tutorials/packaging-projects/ that
+gives a detailed description on how to write this file. Here only provide a
+minimalistic (although functioning) version.
+"""
+
+from setuptools import find_packages, setup
+
+from packageinfo import NAME, OSP_CORE_MIN, OSP_CORE_MAX, VERSION
 
 # Read description
-with open('README.md', 'r') as readme:
+with open('README.md', 'r', encoding="utf8") as readme:
     README_TEXT = readme.read()
 
 
-# main setup configuration class
+# Setup configuration class instantiation. Here is where the metadata of
+# your package is fixed.
 setup(
     name=NAME,
     version=VERSION,
     author='Author info',
-    url='www.some_website.some_domain',
-    description='The wrapper of something for SimPhoNy',
-    keywords='simphony, cuds, something',
+    url='https://www.your_website.domain',
+    description='Mytool wrapper for SimPhoNy',
+    keywords='simphony cuds yourkeyword',
     long_description=README_TEXT,
     install_requires=[
-        'osp-core>=' + OSP_CORE_MIN + ', <' + OSP_CORE_MAX,
+        f'osp-core >= {OSP_CORE_MIN}, < {OSP_CORE_MAX}'
     ],
-    packages=find_packages(exclude=("examples", "tests")),
-    test_suite='tests',
+    packages=find_packages(
+        exclude=("examples",
+                 "tests")),
     entry_points={
         'wrappers':
-            'wrapper = osp.wrappers.some_simulation_session:SomeSimulationSession'},
+            'wrapper = osp.wrappers.'
+            'your_wrapper_sessionsession:YourWrapperSession'},
 )

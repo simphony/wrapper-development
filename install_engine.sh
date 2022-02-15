@@ -15,7 +15,7 @@
 ################################
 ### Download necessary files ###
 ################################
-git clone this_or_that 
+git clone url_of_git_repository
 
 ############################
 ### Perform installation ###
