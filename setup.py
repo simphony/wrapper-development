@@ -29,7 +29,7 @@ setup(
     keywords='simphony cuds yourkeyword',
     long_description=README_TEXT,
     install_requires=[
-        f'osp-core >= {OSP_CORE_MIN} < {OSP_CORE_MAX}'
+        f'osp-core >= {OSP_CORE_MIN}, < {OSP_CORE_MAX}'
     ],
     packages=find_packages(
         exclude=("examples",
