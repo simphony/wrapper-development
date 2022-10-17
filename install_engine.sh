@@ -2,7 +2,7 @@
 #
 # Author: Contact info
 #
-# Description: This script installs some engine and its Python binding
+# Description: This script installs some engine and its Python bindings
 #              Used as part of the installation for some wrapper.
 #
 # Run Information: This script is run manually.
@@ -10,7 +10,16 @@
 ###################################
 ### Install engine requirements ###
 ###################################
-./install_engine_requirements.sh
+echo "Installing necessary requirements for the engine"
+platform=$(python -mplatform)
+
+case $platform in
+  *"Ubuntu"*)
+    sudo apt-get update
+    # Add commands for Ubuntu here
+  ;;
+  # Add other platforms here
+esac
 
 ################################
 ### Download necessary files ###

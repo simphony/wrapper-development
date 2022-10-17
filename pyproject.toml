@@ -1,0 +1,72 @@
+# Configuration file for your wrapper project.
+
+# This file is set-up to work with setuptools. It defines the metadata of the
+# Python package of your wrapper.
+
+# We strongly encourage you to read the "Packaging Python Projects" tutorial,
+# https://packaging.python.org/en/latest/tutorials/packaging-projects/ that
+# gives a detailed description on how to write this file. Here only provide a
+# minimalistic (although functioning) version.
+
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "package-name"
+version = "0.1.0"  # please stick to SemVer https://semver.org/spec/v2.0.0.html
+description = "My package short description"
+readme = "README.md"
+authors = [
+    {name="You", email="you@domain.org"},
+]
+# maintainers = [
+#     {name="Maintainer1", email="maintainer1@domain.org"},
+#     {name="Maintainer2", email="maintainer2@domain.org"},
+# ]
+requires-python = ">=3.7"  # `simphony-osp` itself requires at least Python 3.7
+keywords = ["simphony", "yourkeyword"]
+license = {text = "BSD 3-Clause License"}  # CHOOSE YOUR LICENSE
+# The `license` field is not always required, please check
+# https://packaging.python.org/en/latest/specifications/core-metadata/#license
+classifiers = [
+    "License :: OSI Approved :: BSD License",
+    # CHOOSE YOUR LICENSE. See allowed values: https://pypi.org/classifiers/
+    "Development Status :: 1 - Planning",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Scientific/Engineering :: Physics",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: MacOS",
+    "Operating System :: Unix",
+    # Add your own extra classifiers (or remove from the list above).
+    # Allowed classifiers are listed here https://pypi.org/classifiers/
+]
+dependencies = [
+    "simphony-osp >= 4.0.0rc4, < 5.0.0rc0",
+    "numpy >= 1.14, < 2"
+    # `numpy` required for the specific example in this repository, remove it
+    # if not needed for your wrapper
+]
+
+[project.urls]
+"Homepage" = "https://www.your_website.domain"
+"Source" = "https://github.com/your_organization/your_repository"
+"Documentation" = "https://your_wrapper.readthedocs.io"
+"Tracker" = "https://github.com/your_organization/your_repository/issues"
+
+[project.entry-points."simphony_osp.wrappers"]
+SimulationWrapper = "package_name.wrapper:SimulationWrapper"
+
+# [tool.black]  # recommended
+# line-length = 79
+
+# [tool.isort] # recommended
+# profile = "black"
+# line_length = 79

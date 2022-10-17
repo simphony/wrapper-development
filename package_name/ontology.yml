@@ -1,0 +1,6 @@
+# This is an ontology package pointing to the ontology that your wrapper needs.
+identifier: ontology
+ontology_file: ontology.ttl
+format: 'turtle'
+namespaces:
+    ontology_namespace: http://www.semanticweb.org/you/ontologies/ontology#

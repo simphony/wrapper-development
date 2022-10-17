@@ -1,25 +1,23 @@
-# Wrapper Development
+# Wrapper Development Template
 
-The aim of this project is simplify as much as possible the development of a new Wrapper for __SimPhoNy v3__.
-For this, the general folder and file structure of a wrapper is simulated here, and notes on what to do are provided.
+The aim of this repository is to exemplify how to develop a new wrapper for 
+SimPhoNy. **Before you start**, please have a look at the
+[SimPhoNy documentation](https://simphony.readthedocs.io/en/v4.0.0rc4/)
+(in particular the 
+[wrapper development section](https://simphony.readthedocs.io/en/v4.0.0rc4/developers/wrappers.html)).
 
-We **strongly** recommend going through the [documentation](https://simphony.readthedocs.io/)
-(in particular the [wrapper development section](https://simphony.readthedocs.io/en/latest/wrapper_development.html)) first.
+You may clone this repository and use it as a template to create your own
+wrapper. It provides project configuration files, a folder structure and even a 
+minimalistic implementation of a wrapper.
 
-In `osp/wrappers/simple_simulation` you will find a minimalistic 
-simulation wrapper with the required elements implemented. 
+The version number of this project matches the number of the 
+[`simphony-osp`](https://pypi.org/project/simphony-osp/4.0.0rc4/) package 
+version for which it was last updated. As SimPhoNy follows the 
+[Semantic Versioning](https://semver.org/) convention, this wrapper development
+prototype should be compatible with the newest version of SimPhoNy as long as 
+their major version numbers match.
 
-However, simulation wrappers are not the only kind of wrappers that can be 
-developed. You can find templates of the session classes for other kinds of 
-wrappers in `osp/wrappers`.
+**Do not forget to choose a license and change the file `LICENSE.md` before 
+publishing your wrapper!**
 
-The version number of this project matches the version number of OSP-core 
-for which it was last updated. As OSP-core follows the 
-[Semantic Versioning](https://semver.org/) convention, this wrapper 
-development prototype should be compatible with the newest version of OSP-core 
-as long as their major version numbers match.
-
-*Contact*: [Pablo de Andres](mailto:pablo.de.andres@iwm.fraunhofer.de), 
-[José Manuel Domínguez](mailto:jose.manuel.dominguez@iwm.fraunhofer.de) and 
-[Yoav Nahshon](mailto:yoav.nahshon@iwm.fraunhofer.de) from the 
-Material Informatics team, Fraunhofer IWM.
+*Contact*: [Material Informatics team at Fraunhofer IWM](mailto:simphony@iwm.fraunhofer.de)

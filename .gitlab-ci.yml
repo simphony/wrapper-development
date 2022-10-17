@@ -7,13 +7,7 @@ stages:
 some_job:
   stage: some_stage
   script:
-  # Install osp-core
-    - git clone git@github.com:simphony/osp-core.git
-    - cd osp-core
-    - python3 setup.py install 
-    - pico install ../some/ontology/maybe.yml
-    - cd ..
-  # Other stuff
+    # install the wrapper and an ontology if needed
     - install_some_things
     - run_other_things
     - testing_and_coverage_too
