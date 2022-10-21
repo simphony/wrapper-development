@@ -1,7 +1,7 @@
 """This file emulates communication with a simulation engine."""
 
-from functools import wraps
 from dataclasses import dataclass
+from functools import wraps
 from typing import List, Optional
 
 from numpy import ndarray
@@ -21,10 +21,12 @@ class AtomNotFoundException(KeyError):
     Exception raised by `SimulationEngine` when an index that is not associated
     with an atom in the engine is looked up.
     """
+
     def __init__(self, *args):
-        default_msg = f"No atom with given index registered in the engine"
+        """Initialize the exception with a default message."""
+        default_msg = "No atom with given index registered in the engine"
         if not args:
-            args = (default_msg, )
+            args = (default_msg,)
         super().__init__(*args)
 
 
@@ -35,9 +37,12 @@ def raise_atom_not_found_exception(func):
     decorated method of `SimulationEngine` does not correspond to an atom that
     is registered in the engine.
     """
+
     @wraps(func)
     def decorated(self, index: int, *args, **kwargs):
         exception = AtomNotFoundException()
+        if index < 0:
+            raise exception
         try:
             atom = self._atoms[index]
         except IndexError as e:
@@ -156,7 +161,7 @@ class SimulationEngine:
         return self._atoms[index].velocity
 
     @raise_atom_not_found_exception
-    def get_position(self, index) -> ndarray:
+    def get_position(self, index: int) -> ndarray:
         """Get the position of the atom.
 
         Args:
