@@ -15,16 +15,13 @@ methods of the wrapper class). Such in-depth tests are covered in the files
 """
 
 import unittest
-
 from io import StringIO
 
+from simphony_osp.tools.pico import install, packages
+
 # install the required ontology for the test if not installed
-try:
-    from simphony_osp.namespaces import ontology_namespace as namespace
-except ImportError:
-    from simphony_osp.tools.pico import install
-    install('../package_name/ontology.yml')
-    from simphony_osp.namespaces import ontology_namespace as namespace
+if "ontology" not in packages():
+    install("../package_name/ontology.yml")
 
 
 class TestUsage(unittest.TestCase):
@@ -56,20 +53,22 @@ class TestUsage(unittest.TestCase):
         # Atom
         <http://example.org/entities#{atom_uuid}>
           <{RDF.type}> <{namespace.Atom.identifier}> ;
-          <{namespace.hasPart.identifier}> 
+          <{namespace.hasPart.identifier}>
           <http://example.org/entities#{position_uuid}> ;
-          <{namespace.hasPart.identifier}> 
+          <{namespace.hasPart.identifier}>
           <http://example.org/entities#{velocity_uuid}> .
 
         # Position
         <http://example.org/entities#{position_uuid}>
           <{RDF.type}> <{namespace.Position.identifier}> ;
-          <{namespace.value.identifier}> "{position_as_string}"^^<{Vector.iri}> .
+          <{namespace.value.identifier}>
+          "{position_as_string}"^^<{Vector.iri}> .
 
         # Velocity
         <http://example.org/entities#{velocity_uuid}>
           <{RDF.type}> <{namespace.Velocity.identifier}> ;
-          <{namespace.value.identifier}> "{velocity_as_string}"^^<{Vector.iri}> .
+          <{namespace.value.identifier}>
+          "{velocity_as_string}"^^<{Vector.iri}> .
         """
 
         input_file = StringIO(input_file)
@@ -81,9 +80,9 @@ class TestUsage(unittest.TestCase):
         from simphony_osp.wrappers import SimulationWrapper
 
         with SimulationWrapper() as wrapper:
-            import_file(file=input_file, format='ttl')
+            import_file(file=input_file, format="ttl")
             wrapper.compute()
-            export_file(file=output_file, format='ttl')
+            export_file(file=output_file, format="ttl")
 
         # verify results
         from simphony_osp.session import Session
@@ -91,7 +90,7 @@ class TestUsage(unittest.TestCase):
         output_file.seek(0)
 
         with Session() as session:
-            import_file(output_file, format='ttl')
+            import_file(output_file, format="ttl")
             position = session.get(oclass=namespace.Position).one()
             self.assertEqual(position.value, [4, 12, 19])
 

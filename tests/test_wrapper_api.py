@@ -9,21 +9,13 @@ SimPhoNy could make use of themselves (e.g. no access to private attributes or
 methods of the wrapper class). Such in-depth tests are covered in the files
 "test_unit.py" and "test_integration.py".
 """
-
 import unittest
 
-from simphony_osp.namespaces import owl
-from simphony_osp.session import Session
-from simphony_osp.utils.datatypes import Vector
-from simphony_osp.wrappers import SimulationWrapper
+from simphony_osp.tools.pico import install, packages
 
 # install the required ontology for the test if not installed
-try:
-    from simphony_osp.namespaces import ontology_namespace as namespace
-except ImportError:
-    from simphony_osp.tools.pico import install
-    install('../package_name/ontology.yml')
-    from simphony_osp.namespaces import ontology_namespace as namespace
+if "ontology" not in packages():
+    install("../package_name/ontology.yml")
 
 
 class TestWrapperAPI(unittest.TestCase):
@@ -41,12 +33,16 @@ class TestWrapperAPI(unittest.TestCase):
         passing different configuration strings together with different
         combinations of the "create" argument if it was applicable.
         """
+        from simphony_osp.wrappers import SimulationWrapper
+
         # enough to cover all use cases
         with SimulationWrapper():
             pass
 
     def test_populate(self) -> None:
         """Tests the `populate` method, invoked opening a new session."""
+        from simphony_osp.wrappers import SimulationWrapper
+
         # enough to cover all use cases, since for this wrapper populate does
         # nothing
         with SimulationWrapper():
@@ -54,6 +50,8 @@ class TestWrapperAPI(unittest.TestCase):
 
     def test_close(self):
         """Tests the `close` method."""
+        from simphony_osp.wrappers import SimulationWrapper
+
         session = SimulationWrapper()
         session.close()
 
@@ -78,6 +76,11 @@ class TestWrapperAPI(unittest.TestCase):
             - if desired, return to a consistent state and repeat with a new
               inconsistency of the same type
         """
+        from simphony_osp.namespaces import ontology_namespace as namespace
+        from simphony_osp.namespaces import owl
+        from simphony_osp.session import Session
+        from simphony_osp.utils.datatypes import Vector
+        from simphony_osp.wrappers import SimulationWrapper
 
         def consistent() -> Session:
             """Create a consistent situation in a new session."""
@@ -207,7 +210,7 @@ class TestWrapperAPI(unittest.TestCase):
                 # add a velocity/position that is not attached to an atom
                 class_(
                     value=[8, 5, 3],
-                    unit="m" if class_ == namespace.Position else "m/s"
+                    unit="m" if class_ == namespace.Position else "m/s",
                 )
                 self.assertRaises(AssertionError, wrapper.commit)
 
@@ -221,6 +224,9 @@ class TestWrapperAPI(unittest.TestCase):
 
     def test_compute(self) -> None:
         """Tests the `compute` method."""
+        from simphony_osp.namespaces import ontology_namespace as namespace
+        from simphony_osp.wrappers import SimulationWrapper
+
         with SimulationWrapper() as wrapper:
             atom = namespace.Atom()
             position = namespace.Position(value=[1, 1, 1], unit="m")

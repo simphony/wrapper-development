@@ -13,15 +13,12 @@ import unittest
 from typing import List
 
 from numpy import array
-from package_name.engine import Atom, SimulationEngine, AtomNotFoundException
+from package_name.engine import Atom, AtomNotFoundException, SimulationEngine
+from simphony_osp.tools.pico import install, packages
 
 # install the required ontology for the test if not installed
-try:
-    from simphony_osp.namespaces import ontology_namespace as namespace
-except ImportError:
-    from simphony_osp.tools.pico import install
-    install('../package_name/ontology.yml')
-    from simphony_osp.namespaces import ontology_namespace as namespace
+if "ontology" not in packages():
+    install("../package_name/ontology.yml")
 
 
 class TestWrapperModuleSimulationWrapper(unittest.TestCase):
@@ -95,10 +92,8 @@ class TestEngineModuleSimulationEngine(unittest.TestCase):
     def test_run(self):
         """Tests the `run` method."""
         atoms = [
-            {"position": array([5, 9, 14]),
-             "velocity": array([3, 4, 6])},
-            {"position": array([4, 15, 13]),
-             "velocity": array([18, -1, 2])},
+            {"position": array([5, 9, 14]), "velocity": array([3, 4, 6])},
+            {"position": array([4, 15, 13]), "velocity": array([18, -1, 2])},
         ]
 
         for attributes in atoms:
@@ -119,33 +114,20 @@ class TestEngineModuleSimulationEngine(unittest.TestCase):
                 )
 
         self.engine.run()
-        validate_atoms([
-            [8, 13, 20],
-            [22, 14, 15]
-        ])
+        validate_atoms([[8, 13, 20], [22, 14, 15]])
 
         self.engine.run(time_steps=3)
-        validate_atoms([
-            [17, 25, 38],
-            [76, 11, 21]
-        ])
+        validate_atoms([[17, 25, 38], [76, 11, 21]])
 
         self.engine.run(time_steps=0)
-        validate_atoms([
-            [17, 25, 38],
-            [76, 11, 21]
-        ])
+        validate_atoms([[17, 25, 38], [76, 11, 21]])
 
         self.engine.run(time_steps=-1)
-        validate_atoms([
-            [14, 21, 32],
-            [58, 12, 19]
-        ])
+        validate_atoms([[14, 21, 32], [58, 12, 19]])
 
     def test_add_atom(self):
         """Tests the `add_atom` method."""
-        atom = {"position": [5, 9, 14],
-                "velocity": [3, 4, 6]}
+        atom = {"position": [5, 9, 14], "velocity": [3, 4, 6]}
         self.engine.add_atom(**atom)
 
         self.assertEqual(self.engine.get_position(0), atom["position"])
@@ -153,11 +135,9 @@ class TestEngineModuleSimulationEngine(unittest.TestCase):
 
     def test_delete_atom(self):
         """Tests the `delete_atom` method."""
-        atom1 = {"position": array([5, 9, 14]),
-                 "velocity": array([3, 4, 6])}
+        atom1 = {"position": array([5, 9, 14]), "velocity": array([3, 4, 6])}
         self.engine.add_atom(**atom1)
-        atom2 = {"position": array([0, 1, -5]),
-                 "velocity": array([2, 0, 4])}
+        atom2 = {"position": array([0, 1, -5]), "velocity": array([2, 0, 4])}
         self.engine.add_atom(**atom2)
 
         self.engine.delete_atom(0)
@@ -168,14 +148,13 @@ class TestEngineModuleSimulationEngine(unittest.TestCase):
         )
         self.assertRaises(AtomNotFoundException, self.engine.delete_atom, 0)
         self.assertRaises(AtomNotFoundException, self.engine.delete_atom, 2)
+        self.assertRaises(AtomNotFoundException, self.engine.delete_atom, -1)
 
     def test_update_position(self):
         """Tests the `update_position` method."""
-        atom1 = {"position": array([5, 9, 14]),
-                 "velocity": array([3, 4, 6])}
+        atom1 = {"position": array([5, 9, 14]), "velocity": array([3, 4, 6])}
         self.engine.add_atom(**atom1)
-        atom2 = {"position": array([0, 1, -5]),
-                 "velocity": array([2, 0, 4])}
+        atom2 = {"position": array([0, 1, -5]), "velocity": array([2, 0, 4])}
         self.engine.add_atom(**atom2)
 
         self.engine.update_position(0, array([1, 2, 3]))
@@ -190,22 +169,27 @@ class TestEngineModuleSimulationEngine(unittest.TestCase):
             AtomNotFoundException,
             self.engine.update_position,
             2,
-            array([1, 2, 3])
+            array([1, 2, 3]),
+        )
+        self.assertRaises(
+            AtomNotFoundException,
+            self.engine.update_position,
+            -1,
+            array([1, 2, 3]),
         )
 
     def test_update_velocity(self):
         """Tests the `update_velocity` method."""
-        atom1 = {"position": array([5, 9, 14]),
-                 "velocity": array([3, 4, 6])}
+        atom1 = {"position": array([5, 9, 14]), "velocity": array([3, 4, 6])}
         self.engine.add_atom(**atom1)
-        atom2 = {"position": array([0, 1, -5]),
-                 "velocity": array([2, 0, 4])}
+        atom2 = {"position": array([0, 1, -5]), "velocity": array([2, 0, 4])}
         self.engine.add_atom(**atom2)
 
         self.engine.update_velocity(0, array([1, 2, 3]))
 
         self.assertTrue(
-            (array([1, 2, 3]) == self.engine.get_velocity(0)).all())
+            (array([1, 2, 3]) == self.engine.get_velocity(0)).all()
+        )
         self.assertTrue(
             (atom2["velocity"] == self.engine.get_velocity(1)).all()
         )
@@ -213,16 +197,20 @@ class TestEngineModuleSimulationEngine(unittest.TestCase):
             AtomNotFoundException,
             self.engine.update_velocity,
             2,
-            array([1, 2, 3])
+            array([1, 2, 3]),
+        )
+        self.assertRaises(
+            AtomNotFoundException,
+            self.engine.update_velocity,
+            -1,
+            array([1, 2, 3]),
         )
 
     def test_get_position(self):
         """Tests the `get_position` method."""
-        atom1 = {"position": array([5, 9, 14]),
-                 "velocity": array([3, 4, 6])}
+        atom1 = {"position": array([5, 9, 14]), "velocity": array([3, 4, 6])}
         self.engine.add_atom(**atom1)
-        atom2 = {"position": array([0, 1, -5]),
-                 "velocity": array([2, 0, 4])}
+        atom2 = {"position": array([0, 1, -5]), "velocity": array([2, 0, 4])}
         self.engine.add_atom(**atom2)
 
         self.assertTrue(
@@ -235,11 +223,9 @@ class TestEngineModuleSimulationEngine(unittest.TestCase):
 
     def test_get_velocity(self):
         """Tests the `get_velocity` method."""
-        atom1 = {"position": array([5, 9, 14]),
-                 "velocity": array([3, 4, 6])}
+        atom1 = {"position": array([5, 9, 14]), "velocity": array([3, 4, 6])}
         self.engine.add_atom(**atom1)
-        atom2 = {"position": array([0, 1, -5]),
-                 "velocity": array([2, 0, 4])}
+        atom2 = {"position": array([0, 1, -5]), "velocity": array([2, 0, 4])}
         self.engine.add_atom(**atom2)
 
         self.assertTrue(
@@ -249,3 +235,4 @@ class TestEngineModuleSimulationEngine(unittest.TestCase):
             (atom2["velocity"] == self.engine.get_velocity(1)).all()
         )
         self.assertRaises(AtomNotFoundException, self.engine.get_velocity, 2)
+        self.assertRaises(AtomNotFoundException, self.engine.get_velocity, -1)
