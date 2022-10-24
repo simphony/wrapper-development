@@ -55,6 +55,17 @@ dependencies = [
     # if not needed for your wrapper
 ]
 
+[project.optional-dependencies]
+docs = [
+  "sphinx",
+  "myst-parser",
+  "nbsphinx",
+  "sphinx-autobuild",
+  "sphinx_book_theme",
+  "sphinx-copybutton",
+  "sphinx-panels",
+]
+
 [project.urls]
 "Homepage" = "https://www.your_website.domain"
 "Source" = "https://github.com/your_organization/your_repository"
