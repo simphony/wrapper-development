@@ -8,7 +8,7 @@ SimPhoNy. **Before you start**, please have a look at the
 
 Clone this repository to use it as a template to create your own
 wrapper. It provides project configuration files, a folder structure, an 
-example of a minimalistic implementation of a wrapper, and a documentation 
+example of a minimalistic implementation of a wrapper, tests, and a documentation 
 template. While writing the documentation, you can show it on your web browser
 using [sphinx-autobuild](https://github.com/executablebooks/sphinx-autobuild).
 
