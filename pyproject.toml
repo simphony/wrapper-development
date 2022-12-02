@@ -51,8 +51,8 @@ classifiers = [
 dependencies = [
     "simphony-osp >= 4.0.0rc4, < 5.0.0rc0",
     "numpy >= 1.14, < 2"
-    # `numpy` required for the specific example in this repository, remove it
-    # if not needed for your wrapper
+    # `numpy` is required for the specific example in this repository, remove
+    # it if not needed for your wrapper
 ]
 
 [project.optional-dependencies]
