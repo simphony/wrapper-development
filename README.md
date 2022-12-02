@@ -9,7 +9,8 @@ SimPhoNy. **Before you start**, please have a look at the
 Clone this repository to use it as a template to create your own
 wrapper. It provides project configuration files, a folder structure, an 
 example of a minimalistic implementation of a wrapper, and a documentation 
-template. 
+template. While writing the documentation, you can show it on your web browser
+using [sphinx-autobuild](https://github.com/executablebooks/sphinx-autobuild).
 
 The version number of this project matches the number of the 
 [`simphony-osp`](https://pypi.org/project/simphony-osp/4.0.0rc4/) package 
