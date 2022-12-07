@@ -2,9 +2,9 @@
 
 The aim of this repository is to exemplify how to develop a new wrapper for 
 SimPhoNy. **Before you start**, please have a look at the
-[SimPhoNy documentation](https://simphony.readthedocs.io/en/v4.0.0rc4/)
+[SimPhoNy documentation](https://simphony.readthedocs.io/en/v4.0.0/)
 (in particular the 
-[wrapper development section](https://simphony.readthedocs.io/en/v4.0.0rc4/developers/wrappers.html)).
+[wrapper development section](https://simphony.readthedocs.io/en/v4.0.0/developers/wrappers.html)).
 
 Clone this repository to use it as a template to create your own
 wrapper. It provides project configuration files, a folder structure, an 

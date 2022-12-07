@@ -13,7 +13,7 @@ class SimulationWrapper(Wrapper):
 
     Note: This implementation only makes use of the mandatory wrapper methods,
     as well as the `compute` method. Visit the SimPhoNy documentation
-    https://simphony.readthedocs.io/en/v4.0.0rc4/developers/wrappers.html
+    https://simphony.readthedocs.io/en/v4.0.0/developers/wrappers.html
     to learn more about the additional possibilities and the meaning of each
     method.
     """
