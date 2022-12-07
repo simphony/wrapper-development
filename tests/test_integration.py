@@ -59,7 +59,7 @@ class TestIntegrationWrapperEngine(unittest.TestCase):
         wrapper = session.driver.interface
         # read the diagram on the SimPhoNy documentation to understand how the
         # wrapper object was retrieved from the session object:
-        # https://simphony.readthedocs.io/en/v4.0.0rc4/developers/
+        # https://simphony.readthedocs.io/en/v4.0.0/developers/
         # wrappers.html#wrapper-abstract-class
         session.driver.interface = self._prepare_wrapper_for_types_test(
             wrapper
